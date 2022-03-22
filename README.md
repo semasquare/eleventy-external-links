@@ -2,6 +2,8 @@
 
 An 11ty plugin to protect you external links.
 
+Based on https://github.com/sardinedev/eleventy-plugins/tree/main/packages/external-links.
+
 ## Features
 
 Adds `target="_blank" rel="noreferrer"` to all external links to [make them safer](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer).
