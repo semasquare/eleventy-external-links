@@ -1,56 +1,45 @@
-# `@sardine/eleventy-plugin-external-links`
+# eleventy-plugin-external-links
 
-An 11ty plugin to protect you external links.
+Eleventy plugin to make all external links open securely in a new tab
 
-Based on https://github.com/sardinedev/eleventy-plugins/tree/main/packages/external-links.
-
-## Features
-
-Adds `target="_blank" rel="noreferrer"` to all external links to [make them safer](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer).
-
-Original Anchor tags:
-
-```html
-<html>
-  <body>
-    <a href="https://www.external.com">Hello to the outside!</a>
-    <a href="/internal/link/">Hello to me!</a>
-  </body>
-</html>
+```shell script
+npm install -D eleventy-plugin-external-links
 ```
 
-Generated Anchor tags:
+Then simply add it to you eleventy config
 
-```html
-<html>
-  <body>
-    <a href="https://www.external.com" target="_blank" rel="noreferrer">Hello to the outside!</a>
-    <a href="/internal/link/">Hello to me!</a>
-  </body>
-</html>
+```js
+const externalLinks = require('eleventy-plugin-external-links')
+
+module.exports = (eleventyConfig) => {
+    eleventyConfig.addPlugin(externalLinks, {
+        // Plugin defaults:
+        name: 'external-links',         // Plugin name
+        regex: /^(([a-z]+:)|(\/\/))/i,  // Regex that test if href is external
+        target: "_blank",               // 'target' attribute for external links
+        rel: "noopener",                // 'rel' attribute for external links
+        extensions: [".html"],          // Extensions to apply transform to
+        includeDoctype: true,           // Default to include '<!DOCTYPE html>' at the beginning of the file
+    })
+}
 ```
 
-## Requirements
+Under the hood it adds a simple transform that:
 
-- [Node.js](https://nodejs.org/en/download/) 12 and up
+1. Checks the file extension
+2. Parses the file using [node-html-parser](https://www.npmjs.com/package/node-html-parser)
+3. Finds all the `<a />` tags which `href` matches regex
+4. Add `target` and `rel` attributes to the elements
+5. Return the content with '<!DOCTYPE html>' added at the beginning of the file as default
 
-- [11ty](https://www.11ty.dev/) 0.11
+The default regex will detect links as follows:
 
-## Installation
-
-```bash
-npm install --save-dev @sardine/eleventy-plugin-external-links
-```
-
-## How to use it
-
-```javascript
-const safeLinks = require('@sardine/eleventy-plugin-external-links');
-module.exports = function (eleventyConfig) {
-  eleventyConfig.addPlugin(safeLinks);
-};
-```
-
-## License
-
-[MIT](./LICENSE)
+| Link | External |
+| ---- | -------- |
+| http://google.com | ✔ |
+| https://google.com | ✔ |
+| //google.com | ✔ |
+| mailto:mail@example.com | ✔ |
+| /about |  ❌ |
+| image.jpg |  ❌ |
+| #anchor |  ❌ |
