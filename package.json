@@ -1,7 +1,7 @@
 {
   "name": "@semasquare/eleventy-external-links",
   "version": "1.0.0",
-  "description": "Eleventy plugin to make all external links open securely in a new tab",
+  "description": "Eleventy plugin to make all external links open securely in a new tab and more :)",
   "main": "index.js",
   "license": "MIT",
   "homepage": "https://github.com/semasquare/eleventy-external-links#readme",
