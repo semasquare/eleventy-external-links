@@ -1,21 +1,21 @@
 {
-  "name": "eleventy-plugin-external-links",
-  "version": "1.1.2",
+  "name": "@semasquare/eleventy-external-links",
+  "version": "1.0.0",
   "description": "Eleventy plugin to make all external links open securely in a new tab",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://github.com/vimtor/eleventy-plugin-external-links#readme",
+  "homepage": "https://github.com/semasquare/eleventy-external-links#readme",
   "author": {
-    "name": "Victor Navarro",
-    "email": "victor@vimtor.io",
-    "url": "https://vimtor.io"
+    "name": "semasquare",
+    "email": "info@semasquare.com",
+    "url": "https://semasquare.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vimtor/eleventy-plugin-external-links.git"
+    "url": "git+https://github.com/semasquare/eleventy-external-links.git"
   },
   "bugs": {
-    "url": "https://github.com/vimtor/eleventy-plugin-external-links/issues"
+    "url": "https://github.com/semasquare/eleventy-external-links/issues"
   },
   "keywords": [
     "eleventy",
@@ -23,7 +23,13 @@
     "plugin",
     "links"
   ],
+  "scripts" : {
+    "test": "jest"
+  },
   "dependencies": {
     "node-html-parser": "^3.1.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }

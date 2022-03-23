@@ -1,4 +1,6 @@
-# eleventy-plugin-external-links
+# eleventy-external-links
+
+This project is based on https://github.com/vimtor/eleventy-plugin-external-links.
 
 Eleventy plugin to make all external links open securely in a new tab
 
@@ -43,3 +45,9 @@ The default regex will detect links as follows:
 | /about |  ❌ |
 | image.jpg |  ❌ |
 | #anchor |  ❌ |
+
+## Run tests
+
+```shell
+npm run test
+```
