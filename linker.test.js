@@ -1,10 +1,6 @@
 const {transformLinks} = require('./linker')
 const {HtmlDiffer} = require('html-differ')
 
-function replaceWhitespace  (str) { 
-    return str.replace(/\s+/g, '');
-}
-
 const inputHTML = `
 <!DOCTYPE html>
 <html>
