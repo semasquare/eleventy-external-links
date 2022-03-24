@@ -1,8 +1,8 @@
 # eleventy-external-links
 
-This project is based on https://github.com/vimtor/eleventy-plugin-external-links.
+Eleventy plugin to make all external links open securely in a new tab.
 
-Eleventy plugin to make all external links open securely in a new tab
+This project is based on https://github.com/vimtor/eleventy-plugin-external-links.
 
 ```shell script
 npm install -D eleventy-plugin-external-links
@@ -11,17 +11,20 @@ npm install -D eleventy-plugin-external-links
 Then simply add it to you eleventy config
 
 ```js
-const externalLinks = require('eleventy-plugin-external-links')
+const externalLinks = require('eleventy-external-links')
 
 module.exports = (eleventyConfig) => {
     eleventyConfig.addPlugin(externalLinks, {
         // Plugin defaults:
-        name: 'external-links',         // Plugin name
-        regex: /^(([a-z]+:)|(\/\/))/i,  // Regex that test if href is external
-        target: "_blank",               // 'target' attribute for external links
-        rel: "noopener",                // 'rel' attribute for external links
-        extensions: [".html"],          // Extensions to apply transform to
-        includeDoctype: true,           // Default to include '<!DOCTYPE html>' at the beginning of the file
+        extensions: [".html"],                                  // Extensions to apply transform to
+        rules: [
+            {
+                name: "external links",                         // Plugin name
+                regex: new RegExp("^(([a-z]+:)|(//))", "i"),    // Regex that test if href is external
+                target: "_blank",                               // 'target' attribute for external links
+                rel: "noopener"                                 // 'rel' attribute for external links
+            }
+        ]
     })
 }
 ```
