@@ -5,13 +5,13 @@ Eleventy plugin to make all external links open securely in a new tab.
 This project is based on https://github.com/vimtor/eleventy-plugin-external-links.
 
 ```shell script
-npm install -D eleventy-plugin-external-links
+npm install semasquare/eleventy-external-links#v1.0.0 --save
 ```
 
 Then simply add it to you eleventy config
 
 ```js
-const externalLinks = require('eleventy-external-links')
+const externalLinks = require("@semasquare/eleventy-external-links");
 
 module.exports = (eleventyConfig) => {
     eleventyConfig.addPlugin(externalLinks, {
