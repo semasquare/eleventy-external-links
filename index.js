@@ -3,12 +3,15 @@ const { transformLinks } = require("./linker");
 
 module.exports = (eleventyConfig, userOptions = {}) => {
   const options = {
-    name: "external-links",
-    regex: new RegExp("^(([a-z]+:)|(//))", "i"),
-    target: "_blank",
-    rel: "noopener",
     extensions: [".html"],
-    includeDoctype: true,
+    rules: [
+      {
+        name: "external links",
+        regex: new RegExp("^(([a-z]+:)|(//))", "i"),
+        target: "_blank",
+        rel: "noopener",
+      },
+    ],
     ...userOptions,
   };
 
