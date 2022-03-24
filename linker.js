@@ -14,6 +14,6 @@ module.exports = {
 
     const newContent = root.toString();
 
-    return options.includeDoctype ? `<!DOCTYPE html>${newContent}` : newContent;
+    return newContent;
   },
 };
