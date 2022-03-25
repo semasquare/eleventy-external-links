@@ -1,54 +1,56 @@
-# `@sardine/eleventy-plugin-external-links`
+# eleventy-external-links
 
-An 11ty plugin to protect you external links.
+Eleventy plugin to make all external links open securely in a new tab.
 
-## Features
+This project is based on https://github.com/vimtor/eleventy-plugin-external-links.
 
-Adds `target="_blank" rel="noreferrer"` to all external links to [make them safer](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer).
-
-Original Anchor tags:
-
-```html
-<html>
-  <body>
-    <a href="https://www.external.com">Hello to the outside!</a>
-    <a href="/internal/link/">Hello to me!</a>
-  </body>
-</html>
+```shell script
+npm install semasquare/eleventy-external-links#v1.0.0 --save
 ```
 
-Generated Anchor tags:
+Then simply add it to you eleventy config
 
-```html
-<html>
-  <body>
-    <a href="https://www.external.com" target="_blank" rel="noreferrer">Hello to the outside!</a>
-    <a href="/internal/link/">Hello to me!</a>
-  </body>
-</html>
+```js
+const externalLinks = require("@semasquare/eleventy-external-links");
+
+module.exports = (eleventyConfig) => {
+    eleventyConfig.addPlugin(externalLinks, {
+        // Plugin defaults:
+        extensions: [".html"],                                  // Extensions to apply transform to
+        rules: [
+            {
+                name: "external links",                         // Plugin name
+                regex: new RegExp("^(([a-z]+:)|(//))", "i"),    // Regex that test if href is external
+                target: "_blank",                               // 'target' attribute for external links
+                rel: "noopener"                                 // 'rel' attribute for external links
+            }
+        ]
+    })
+}
 ```
 
-## Requirements
+Under the hood it adds a simple transform that:
 
-- [Node.js](https://nodejs.org/en/download/) 12 and up
+1. Checks the file extension
+2. Parses the file using [node-html-parser](https://www.npmjs.com/package/node-html-parser)
+3. Finds all the `<a />` tags which `href` matches regex
+4. Add `target` and `rel` attributes to the elements
+5. Return the content with '<!DOCTYPE html>' added at the beginning of the file as default
 
-- [11ty](https://www.11ty.dev/) 0.11
+The default regex will detect links as follows:
 
-## Installation
+| Link | External |
+| ---- | -------- |
+| http://google.com | ✔ |
+| https://google.com | ✔ |
+| //google.com | ✔ |
+| mailto:mail@example.com | ✔ |
+| /about |  ❌ |
+| image.jpg |  ❌ |
+| #anchor |  ❌ |
 
-```bash
-npm install --save-dev @sardine/eleventy-plugin-external-links
+## Run tests
+
+```shell
+npm run test
 ```
-
-## How to use it
-
-```javascript
-const safeLinks = require('@sardine/eleventy-plugin-external-links');
-module.exports = function (eleventyConfig) {
-  eleventyConfig.addPlugin(safeLinks);
-};
-```
-
-## License
-
-[MIT](./LICENSE)
