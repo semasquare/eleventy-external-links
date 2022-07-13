@@ -10,6 +10,7 @@ module.exports = (eleventyConfig, userOptions = {}) => {
         regex: new RegExp("^(([a-z]+:)|(//))", "i"),
         target: "_blank",
         rel: "noopener",
+        endUrlWith: "" // options: "slash", "without-slash"
       },
     ],
     ...userOptions,

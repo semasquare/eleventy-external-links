@@ -9,6 +9,16 @@ module.exports = {
 
       options.rules.every((rule) => {
         if (href && rule.regex.test(href)) {
+          if (rule.endUrlWith == "slash") {
+            if (href.slice(-1) != "/") {
+              link.setAttribute("href", href + "/")
+            }
+          } else if (rule.endUrlWith == "without-slash") {
+            if (href.slice(-1) == "/") {
+              link.setAttribute("href", href.slice(0, -1))
+            }
+          }
+
           if (rule.target != "") {
             link.setAttribute("target", rule.target);
           } else {
